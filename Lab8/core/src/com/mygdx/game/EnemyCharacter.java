@@ -11,31 +11,25 @@ public class EnemyCharacter extends  PowerRanger {
 
         health = 100;
 
-        String[] idleString = {"sprites/rangers/blue/BlueRanger_0.png", "sprites/rangers/blue/BlueRanger_1.png",
-                "sprites/rangers/blue/BlueRanger_2.png", "sprites/rangers/blue/BlueRanger_3.png"};
+        String[] idleString = {"sprites/rangers/enemyfighter/gogetta_idle.png", "sprites/rangers/enemyfighter/gogetta_idle2.png"};
 
-        String[] moveString = {"sprites/rangers/blue/BlueRanger_11.png", "sprites/rangers/blue/BlueRanger_12.png",
-                "sprites/rangers/blue/BlueRanger_13.png", "sprites/rangers/blue/BlueRanger_14.png","sprites/rangers/blue/BlueRanger_15.png", "sprites/rangers/blue/BlueRanger_16.png",
-                "sprites/rangers/blue/BlueRanger_17.png", "sprites/rangers/blue/BlueRanger_18.png"};
-        String[] moveBackString = {"sprites/rangers/blue/BlueRanger_22.png", "sprites/rangers/blue/BlueRanger_21.png",
-                "sprites/rangers/blue/BlueRanger_20.png", "sprites/rangers/blue/BlueRanger_19.png"};
+        String[] moveString = {"sprites/rangers/enemyfighter/gogetta_forward.png","sprites/rangers/enemyfighter/gogetta_forward2.png"};
+        String[] moveBackString = {"sprites/rangers/enemyfighter/gogetta_backward.png"};
 
-        String[] moveVerticalString = {"sprites/rangers/blue/BlueRanger_130.png"};
+        String[] moveVerticalString = {"sprites/rangers/enemyfighter/gogetta_teleport1.png","sprites/rangers/enemyfighter/gogetta_teleport2.png"};
 
-        String[] attackString = {"sprites/rangers/blue/BlueRanger_273.png", "sprites/rangers/blue/BlueRanger_274.png",
-                "sprites/rangers/blue/BlueRanger_275.png"};
+        String[] attackString = {"sprites/rangers/enemyfighter/gogetta_attack1.png","sprites/rangers/enemyfighter/gogetta_attack2.png"};
 
-        String[] specialAttackString = {"sprites/rangers/blue/BlueRanger_184.png", "sprites/rangers/blue/BlueRanger_185.png",
-                "sprites/rangers/blue/BlueRanger_186.png","sprites/rangers/blue/BlueRanger_188.png", "sprites/rangers/blue/BlueRanger_189.png"};
+        String[] specialAttackString = {"sprites/rangers/enemyfighter/gogetta_super1.png","sprites/rangers/enemyfighter/gogetta_super2.png"};
 
         isAttacking = false;
 
         idle = loadAnimationFromFiles(idleString, 0.5f, true);
-        moveForward = loadAnimationFromFiles(moveString,0.25f,true);
+        moveForward = loadAnimationFromFiles(moveString,0.5f,true);
         moveBackward = loadAnimationFromFiles(moveBackString, 0.25f, true);
         moveVertical = loadAnimationFromFiles(moveVerticalString, 0.25f, true);
-        basicAttack = loadAnimationFromFiles(attackString, 0.25f, true);
-        superAttack = loadAnimationFromFiles(specialAttackString, 0.25f, true);
+        basicAttack = loadAnimationFromFiles(attackString, 0.25f, false);
+        superAttack = loadAnimationFromFiles(specialAttackString, 0.25f, false);
         this.setBoundaryRectangle();
 
         setScale(4.0f);

@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
@@ -25,8 +26,9 @@ public class DialogBox extends ActorBeta {
     DialogBox(float x, float y, Stage s) {
         super(x, y, s);
         loadTexture("sprites/ui/dialog-translucent.png");
+        skin = new Skin(Gdx.files.internal("skins/quantum-horizon/skin/quantum-horizon-ui.json"));
 
-        dialogLabel = new Label(" ", skin, "default");
+        dialogLabel = new Label("", skin, "default");
         dialogLabel.setWrap(true);
         dialogLabel.setPosition(padding, padding);
         this.setDialogSize(getWidth(), getHeight());

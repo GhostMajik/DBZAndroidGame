@@ -94,7 +94,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor {
         tableContainer.setSize(WIDTH / 3, HEIGHT/2);
         tableContainer.setPosition((WIDTH - cw) - (tableContainer.getWidth() / 2), (HEIGHT -ch) * 0.25f);
         tableContainer.fillX();
-        tableContainer.setDebug(true);
+        tableContainer.setDebug(false);
 
         uiTable = new Table();
 
@@ -111,7 +111,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor {
         gameTableContainer.setSize(WIDTH / 3, HEIGHT);
         gameTableContainer.setPosition((WIDTH - cw2) - (gameTableContainer.getWidth() / 2), (HEIGHT -ch2) * 0.25f);
         gameTableContainer.fillX();
-        gameTableContainer.setDebug(true);
+        gameTableContainer.setDebug(false);
 
         gameUiTable = new Table();
 
@@ -205,7 +205,7 @@ public abstract class ScreenBeta implements Screen, InputProcessor {
         mainStage.draw();
         uiStage.draw();
 
-        uiTable.setDebug(true);
+        uiTable.setDebug(false);
     }
 
     public boolean isTouchDownEvent(Event e) {

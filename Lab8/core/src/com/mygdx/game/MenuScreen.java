@@ -24,7 +24,6 @@ public class MenuScreen extends ScreenBeta {
     Label label;
     Music menuMusic;
 
-    /**PARTICLE EFFECTS**/
     FireParticle fire;
 
 
@@ -85,8 +84,8 @@ public class MenuScreen extends ScreenBeta {
             public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 super.touchDown(event, x, y, pointer, button);
                 menuMusic.stop();
-                MyGame.gameScreen = new GameScreen();
-                MyGame.setActiveScreen(MyGame.gameScreen);
+                MyGame.storyScreen = new StoryScreen();
+                MyGame.setActiveScreen(MyGame.storyScreen);
 
             }
         });

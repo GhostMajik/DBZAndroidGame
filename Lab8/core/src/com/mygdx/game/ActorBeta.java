@@ -127,6 +127,7 @@ public class ActorBeta extends Actor {
         TextureRegion tr = animation.getKeyFrame(0);
         float w = tr.getRegionWidth();
         float h = tr.getRegionHeight();
+        elapsedTime = 0;
 
         setSize(w, h);
         setOrigin(w / 2, h / 2);
@@ -154,6 +155,7 @@ public class ActorBeta extends Actor {
 
         //Instantiate animation object while passing in array and duration of each frame
         Animation<TextureRegion> anim = new Animation<TextureRegion>(frameDuration, textureArray);
+
 
         //if loop is true, set LOOP ON
         if (loop)

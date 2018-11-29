@@ -9,12 +9,12 @@ public class EnemyKiBlast extends Projectile {
      boolean isAlive;
     EnemyKiBlast(){
         isAlive = true;
-        String[] kiBlast = {"sprites/kiblast0.png","sprites/kiblast2.png","sprites/kiblast1.png","sprites/kiblast3.png"};
+        String[] kiBlast = {"sprites/evilKi0.png","sprites/evilKi1.png","sprites/evilKi2.png","sprites/evilKi3.png"};
         //      String[] deathBlast = {""};
 
         moving = loadAnimationFromFiles(kiBlast,0.25f,true);
 //        death = loadAnimationFromFiles(deathBlast, 0.5f, true);
-        setScale(5.0f);
+        setScale(2.0f);
         setMaxSpeed(500);
     }
 

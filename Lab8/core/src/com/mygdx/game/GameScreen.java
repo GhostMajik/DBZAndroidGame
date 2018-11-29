@@ -7,6 +7,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -26,6 +27,7 @@ public class GameScreen extends ScreenBeta {
     EnemyCharacter enemyCharacter;
     PlayerKiBlast kiBlast;
     EnemyKiBlast enemyKiBlast;
+    PlayerKiSuper playerKiSuper;
 
     Touchpad touchpad;
 
@@ -109,6 +111,12 @@ public class GameScreen extends ScreenBeta {
                     blueRanger.setAnimation(blueRanger.basicAttack);
                     blueRanger.isAttacking = true;
                     punchSound.play();
+                    kiBlast = new PlayerKiBlast();
+                    kiBlast.isAlive = true;
+                    kiBlast.setAnimation(kiBlast.moving);
+                    kiBlast.setPosition(blueRanger.getX() + kiBlast.getWidth() + blueRanger.getWidth() + 50,blueRanger.getY());
+                    mainStage.addActor(kiBlast);
+                    kiAttackSound.play();
 
                 }
                 return false;
@@ -116,9 +124,11 @@ public class GameScreen extends ScreenBeta {
             }
         });
 
-        bButton.addListener(new EventListener() {
+        bButton.addListener(new ActorGestureListener() {
             @Override
-            public boolean handle(Event event) {
+            public void touchDown(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchDown(event, x, y, pointer, button);
+
                 if(!blueRanger.isAttacking) {
                     com.badlogic.gdx.utils.Timer.schedule(new com.badlogic.gdx.utils.Timer.Task() {
                         @Override
@@ -129,14 +139,13 @@ public class GameScreen extends ScreenBeta {
                     }, blueRanger.superAttack.getAnimationDuration());
                     blueRanger.setAnimation(blueRanger.superAttack);
                     blueRanger.isAttacking = true;
-                    kiBlast = new PlayerKiBlast();
-                    kiBlast.isAlive = true;
-                    kiBlast.setAnimation(kiBlast.moving);
-                    kiBlast.setPosition(blueRanger.getX(),blueRanger.getY());
-                    mainStage.addActor(kiBlast);
+                    playerKiSuper = new PlayerKiSuper();
+                    playerKiSuper.isAlive = true;
+                    playerKiSuper.setAnimation(playerKiSuper.moving);
+                    playerKiSuper.setPosition(blueRanger.getX() + playerKiSuper.getWidth() + blueRanger.getWidth() + 50,blueRanger.getY());
+                    mainStage.addActor(playerKiSuper);
                     kiAttackSound.play();
                 }
-                return false;
             }
         });
 
@@ -220,9 +229,10 @@ public class GameScreen extends ScreenBeta {
         enemyCharacter.boundToWorld();
     }
 
+    //TODO, add more random logic to the AI, add decision for when projectile is WithinDistance X to move or stay, randomize decision to counter super attack with super, move or idle.
     void moveAI(){
-        //fix this to allow AI to superattack after a given amount of time if within Y range of player
-        if(enemyCharacter.getY() == blueRanger.getY()){
+        //redo this super attack if statement if given time
+      /*  if(enemyCharacter.getY() == blueRanger.getY()){
             if(!enemyCharacter.isAttacking) {
                 enemyCharacter.isAttacking = true;
                 enemyCharacter.setAnimation(enemyCharacter.superAttack);
@@ -234,14 +244,23 @@ public class GameScreen extends ScreenBeta {
                 }, 5f);
 
             }
-        }
+        }*/
         if(enemyCharacter.isWithinDistance( 300 + blueRanger.getWidth(),blueRanger)){
             enemyCharacter.moveBy(2,0);
             enemyCharacter.setAnimation(enemyCharacter.moveBackward);
         }
         //can expand this to have a better attack targeting approach for the AI, should be closer on Y before attacking
-        else if(enemyCharacter.isWithinDistance(500 + blueRanger.getWidth(), blueRanger) || enemyCharacter.isWithinDistance( -300 - blueRanger.getWidth(), blueRanger)){
-            if(!enemyCharacter.isAttacking) {
+        else if(enemyCharacter.isWithinDistance(WIDTH/3 + blueRanger.getWidth(), blueRanger) || enemyCharacter.isWithinDistance( -WIDTH/3 - blueRanger.getWidth(), blueRanger)){
+            if(blueRanger.getY() > enemyCharacter.getY() + 50){
+                enemyCharacter.moveBy(0,5);
+                enemyCharacter.setAnimation(enemyCharacter.moveVertical);
+            }
+            if(blueRanger.getY() < enemyCharacter.getY() - 50){
+                enemyCharacter.moveBy(0,-5);
+                enemyCharacter.setAnimation(enemyCharacter.moveForward);
+               // enemyCharacter.setAnimation(enemyCharacter.moveVertical);
+            }
+            else if(!enemyCharacter.isAttacking) {
                 enemyCharacter.isAttacking = true;
                 enemyCharacter.setAnimation(enemyCharacter.basicAttack);
                 //spawn ki blast
@@ -279,11 +298,9 @@ public class GameScreen extends ScreenBeta {
                 enemyCharacter.moveBy(2,0);
                 enemyCharacter.setAnimation(enemyCharacter.moveBackward);
             }
-
-          /*  if(enemyCharacter.getX() > WIDTH/2) {
-                enemyCharacter.moveBy((blueRanger.getX() - enemyCharacter.getX()) / 250, (blueRanger.getY() - enemyCharacter.getY()) / 250);
-                enemyCharacter.setAnimation(enemyCharacter.moveForward);
-            }*/
+        }
+        else if(!enemyCharacter.isWithinDistance(800,blueRanger)){
+            enemyCharacter.setAnimation(enemyCharacter.idle);
         }
     }
 
