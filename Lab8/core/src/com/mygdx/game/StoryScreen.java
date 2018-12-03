@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
@@ -15,6 +16,7 @@ public class StoryScreen extends ScreenBeta {
     private int textCount;
     private ActorBeta playerProfile;
     private ActorBeta enemyProfile;
+    Music storyMusic;
 
     public void initialize() {
         ActorBeta background = new ActorBeta(0, 0, mainStage);
@@ -31,6 +33,11 @@ public class StoryScreen extends ScreenBeta {
         enemyProfile.loadTexture("sprites/rangers/enemyfighter/gogetta_profile.png");
         enemyProfile.setSize(-WIDTH/3, HEIGHT/2);
         enemyProfile.setPosition(WIDTH,HEIGHT/2);
+
+        storyMusic = Gdx.audio.newMusic(Gdx.files.internal("sounds/dialogue_music.mp3"));
+        storyMusic.setVolume(0.5f);
+        storyMusic.setPosition(2.5f);
+        storyMusic.play();
 
         textCount = 0;
 
@@ -106,6 +113,7 @@ public class StoryScreen extends ScreenBeta {
                 enemyProfile.setOpacity(1);
                 break;
             case 6:
+                storyMusic.stop();
                 MyGame.gameScreen = new GameScreen();
                 MyGame.setActiveScreen(MyGame.gameScreen);
 

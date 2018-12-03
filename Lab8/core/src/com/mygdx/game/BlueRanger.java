@@ -33,9 +33,10 @@ public class BlueRanger extends PowerRanger {
         moveVertical = loadAnimationFromFiles(moveVerticalString, 0.25f, true);
         basicAttack = loadAnimationFromFiles(attackString, 0.25f, false);
         superAttack = loadAnimationFromFiles(specialAttackString, 0.25f, false);
+        setOrigin(getX()/2,getY()/2);
         this.setBoundaryRectangle();
 
-        setScale(4.0f);
+        setScale(5.0f);
 
         setMaxSpeed(900);
 

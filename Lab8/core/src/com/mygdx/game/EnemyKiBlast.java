@@ -14,8 +14,9 @@ public class EnemyKiBlast extends Projectile {
 
         moving = loadAnimationFromFiles(kiBlast,0.25f,true);
 //        death = loadAnimationFromFiles(deathBlast, 0.5f, true);
+        this.setBoundaryRectangle();
         setScale(2.0f);
-        setMaxSpeed(500);
+        setMaxSpeed(300);
     }
 
 
@@ -23,7 +24,7 @@ public class EnemyKiBlast extends Projectile {
     @Override
     public void act(float dt) {
         super.act(dt);
-        setAcceleration(300);
+        setAcceleration(100);
         accelerateAtAngle(180);
        /* if(!isAlive){
             setAnimation(death);

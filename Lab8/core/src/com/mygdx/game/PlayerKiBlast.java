@@ -14,21 +14,22 @@ public class PlayerKiBlast extends Projectile {
 
         moving = loadAnimationFromFiles(kiBlast,0.25f,true);
 //        death = loadAnimationFromFiles(deathBlast, 0.5f, true);
+        this.setBoundaryRectangle();
         setScale(5.0f);
-        setMaxSpeed(500);
+        setMaxSpeed(300);
 
 
     }
 
+
+
     @Override
     public void act(float dt) {
         super.act(dt);
-        setAcceleration(300);
+        setAcceleration(100);
         accelerateAtAngle(0);
-       /* if(!isAlive){
-            setAnimation(death);
-            setAcceleration(0);
-            setSpeed(0);
-        }*/
+        if(!isAlive){
+           remove();
+        }
     }
 }

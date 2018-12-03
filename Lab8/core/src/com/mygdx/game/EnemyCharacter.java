@@ -9,7 +9,7 @@ public class EnemyCharacter extends  PowerRanger {
     public boolean isAttacking;
     EnemyCharacter(){
 
-        health = 100;
+        health = 1;
 
         String[] idleString = {"sprites/rangers/enemyfighter/gogetta_idle.png", "sprites/rangers/enemyfighter/gogetta_idle2.png"};
 
@@ -30,6 +30,7 @@ public class EnemyCharacter extends  PowerRanger {
         moveVertical = loadAnimationFromFiles(moveVerticalString, 0.25f, true);
         basicAttack = loadAnimationFromFiles(attackString, 0.25f, false);
         superAttack = loadAnimationFromFiles(specialAttackString, 0.25f, false);
+        setOrigin(getX()/2,getY()/2);
         this.setBoundaryRectangle();
 
         setScale(4.0f);
